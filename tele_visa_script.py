@@ -15,6 +15,7 @@ def notify(title, text):
 #This function listens for new messages in the dropbox channel. You can change it to the VAC channel if you want
 @client.on(events.NewMessage(chats='H1B_H4_Visa_Dropbox_slots'))    #select channel you want to monitor
 async def my_event_handler(event):
+    print(event.raw_text)
     if event.photo:
         notify("image -", event.raw_text)
         await client.send_message(entity=entity,message=event.message)
