@@ -9,7 +9,7 @@ How do I use this?
 1. Check python version (I used 3.9.7)
 `python3 --version`
 
-2. Create a new telegram bot. To do this, you need to message `BotFather` with a `/newbot` command. This will ask you for a name, and finally output an API token that looks like `3434434:AAFCCergqwe4KEWpHvO8jkvvw4JWG2A`. It is in the `api_id:api_hash` format. Keep this token handy
+2. Create a new telegram app. https://my.telegram.org/apps - go here, login and create a new app. It should give you API ID and API Hash values
 
 3. In the python script add values for `api_hash` and `api_id`. From step #2
 
