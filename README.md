@@ -11,7 +11,11 @@ How do I use this?
 
 2. Create a new telegram app. https://my.telegram.org/apps - go here, login and create a new app. It should give you API ID and API Hash values
 
+![image](https://user-images.githubusercontent.com/4116653/143096895-b1a29f9b-ea09-4f8e-9156-e90f1392f879.png)
+
 3. In the python script add values for `api_hash` and `api_id`. From step #2
+
+![image](https://user-images.githubusercontent.com/4116653/143068961-cb532e6d-1bc7-4777-b02e-a4f56eaf3a98.png)
 
 4. Create a new telegram channel. Take a note of the username, and add it to the python script for `YOUR CHANNEL HERE` placeholder. This is where you will get screenshots forwarded to. 
 
@@ -21,4 +25,3 @@ How do I use this?
 
 All the best, dont loose hope!!
 
-![image](https://user-images.githubusercontent.com/4116653/143068961-cb532e6d-1bc7-4777-b02e-a4f56eaf3a98.png)
