@@ -18,3 +18,5 @@ How do I use this?
 6. Keep script running. Install Telegram app on desktop. As soon as you get notification, start booking and dont give up. 
 
 All the best, dont loose hope!!
+
+![image](https://user-images.githubusercontent.com/4116653/143068961-cb532e6d-1bc7-4777-b02e-a4f56eaf3a98.png)
