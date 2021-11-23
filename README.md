@@ -4,6 +4,8 @@ I created this bot to getnotified when screenshots are available in the Telegram
 
 How do I use this?
 
+0. Clone this repo. Open your terminal and type `git clone https://github.com/jimiljojo/visa-slot-bot.git`. Once downloaded, `cd visa-slot=bot` to go inside the directory. 
+
 1. Check python version (I used 3.9.7)
 `python3 --version`
 
