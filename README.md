@@ -17,7 +17,10 @@ How do I use this?
 
 ![image](https://user-images.githubusercontent.com/4116653/143068961-cb532e6d-1bc7-4777-b02e-a4f56eaf3a98.png)
 
-4. Create a new telegram channel. Take a note of the username, and add it to the python script for `YOUR CHANNEL HERE` placeholder. This is where you will get screenshots forwarded to. 
+4. Create a new telegram channel. Take a note of the username, and add it to the python script for `YOUR CHANNEL HERE` placeholder. This is where you will get screenshots forwarded to.
+    1. Create a new channel and select public
+    2. Type a name after https://t.me/xxxxxx ( this can be same as channelname)
+    3. Use the above name if the script
 
 5. Run the python script by typing `python3 tele_visa_script.py`. You will now get MacOS notification when a screenshot is available on the Dropbox channel with slots available. 
 
