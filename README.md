@@ -1,1 +1,20 @@
-# visa-slot-bot
+# Visa slot bot
+
+I created this bot to getnotified when screenshots are available in the Telegram channel for dropbox appointments. 
+
+How do I use this?
+
+1. Check python version (I used 3.9.7)
+`python3 --version`
+
+2. Create a new telegram bot. To do this, you need to message `BotFather` with a `/newbot` command. This will ask you for a name, and finally output an API token that looks like `3434434:AAFCCergqwe4KEWpHvO8jkvvw4JWG2A`. It is in the `api_id:api_hash` format. Keep this token handy
+
+3. In the python script add values for `api_hash` and `api_id`. From step #2
+
+4. Create a new telegram channel. Take a note of the username, and add it to the python script for `YOUR CHANNEL HERE` placeholder. This is where you will get screenshots forwarded to. 
+
+5. Run the python script by typing `python3 tele_visa_script.py`. You will now get MacOS notification when a screenshot is available on the Dropbox channel with slots available. 
+
+6. Keep script running. Install Telegram app on desktop. As soon as you get notification, start booking and dont give up. 
+
+All the best, dont loose hope!!
