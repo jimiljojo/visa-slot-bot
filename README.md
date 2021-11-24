@@ -4,7 +4,7 @@ I created this bot to getnotified when screenshots are available in the Telegram
 
 How do I use this?
 
-0. Clone this repo. Open your terminal and type `git clone https://github.com/jimiljojo/visa-slot-bot.git`. Once downloaded, `cd visa-slot=bot` to go inside the directory. 
+0. Clone this repo. Open your terminal and type `git clone https://github.com/jimiljojo/visa-slot-bot.git`. Once downloaded, `cd visa-slot-bot` to go inside the directory. 
 
 1. Check python version (I used 3.9.7)
 `python3 --version`
@@ -20,7 +20,7 @@ How do I use this?
 4. Create a new telegram channel. Take a note of the username, and add it to the python script for `YOUR CHANNEL HERE` placeholder. This is where you will get screenshots forwarded to.
     1. Create a new channel and select public
     2. Type a name after https://t.me/xxxxxx ( this can be same as channelname)
-    3. Use the above name if the script
+    3. Use the above name for `YOUR CHANNEL HERE`. (tip: you can also put your username there)
 
 5. Run the python script by typing `python3 tele_visa_script.py`. You will now get MacOS notification when a screenshot is available on the Dropbox channel with slots available. 
 
