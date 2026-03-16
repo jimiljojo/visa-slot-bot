@@ -79,3 +79,5 @@ Keep this script running (e.g. in a terminal window or tmux/screen). When you re
 The older script `tele_visa_script.py` is kept in the repo for reference but is no longer maintained. Please use `telegram_monitor_clean.py` with `.env` and `requirements.txt` instead.
 
 All the best, don’t lose hope!!
+
+_This project now uses signed commits for better provenance._
