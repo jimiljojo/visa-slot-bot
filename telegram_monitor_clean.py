@@ -1,4 +1,5 @@
 import os
+import io
 from telethon import TelegramClient, events
 from dotenv import load_dotenv
 import logging
@@ -21,8 +22,27 @@ logger.info(f"NOTIFY_CHAT_ID: {NOTIFY_CHAT_ID}")
 client = TelegramClient('userbot_session', API_ID, API_HASH)
 
 async def send_notification(message, photo_file=None):
-    """Send notification directly to chat ID"""
+    """Send notification to NOTIFY_CHAT_ID. Media from other chats is always downloaded
+    and re-uploaded (never forwarded) so it works with protected chats."""
     try:
+        # Always re-upload media from the monitored group: download to bytes then send.
+        # This avoids "You can't forward messages from a protected chat" and ensures
+        # every image (startup "last image" + all subsequent NewMessage images) is sent the same way.
+        if photo_file is not None and not isinstance(photo_file, (str, bytes, io.IOBase)):
+            try:
+                logger.info("Downloading media to re-upload (no forwarding)...")
+                data = await client.download_media(photo_file, file=bytes)
+                if data:
+                    buf = io.BytesIO(data)
+                    buf.name = "image.jpg"
+                    photo_file = buf
+                else:
+                    logger.error("Failed to download media; sending text only.")
+                    photo_file = None
+            except Exception as e:
+                logger.error(f"Failed to download media; sending text only. Error: {e}")
+                photo_file = None
+
         # Try different ways to send the message
         success = False
         
@@ -92,34 +112,32 @@ async def main():
         logger.error(f"Failed to send test notification: {e}")
         return
 
-    # Log the last message and send last image for testing
+    # Find and send the most recent image in the group's history (no message count limit)
     last_image_sent = False
-    async for message in client.iter_messages(group, limit=10):  # Check last 10 messages
-        if not last_image_sent:
-            if message.photo:
-                logger.info(f"Found last image in group, sending for testing...")
-                try:
-                    await send_notification("🖼️ Last image from group (testing)", message.photo)
-                    logger.info("Last image sent successfully for testing")
-                    last_image_sent = True
-                except Exception as e:
-                    logger.error(f"Failed to send last image: {e}")
-            elif message.file and message.file.mime_type and message.file.mime_type.startswith('image/'):
-                logger.info(f"Found last image file in group, sending for testing...")
-                try:
-                    await send_notification("🖼️ Last image from group (testing)", message.file)
-                    logger.info("Last image sent successfully for testing")
-                    last_image_sent = True
-                except Exception as e:
-                    logger.error(f"Failed to send last image file: {e}")
-        
-        # Log the last text message
-        if message.text and not last_image_sent:
-            logger.info(f"Last text message in group: '{message.text[:100]}' at {message.date}")
+    async for message in client.iter_messages(group):
+        if message.photo:
+            logger.info("Found last image in group, sending for testing...")
+            try:
+                await send_notification("🖼️ Last image from group (testing)", message.photo)
+                logger.info("Last image sent successfully for testing")
+                last_image_sent = True
+            except Exception as e:
+                logger.error(f"Failed to send last image: {e}")
             break
+        elif message.file and message.file.mime_type and message.file.mime_type.startswith('image/'):
+            logger.info(f"Found last image file in group, sending for testing...")
+            try:
+                await send_notification("🖼️ Last image from group (testing)", message.file)
+                logger.info("Last image sent successfully for testing")
+                last_image_sent = True
+            except Exception as e:
+                logger.error(f"Failed to send last image file: {e}")
+            break
+        elif message.text and not last_image_sent:
+            logger.info(f"Last text message encountered before any image: '{message.text[:100]}' at {message.date}")
     
     if not last_image_sent:
-        logger.info("No recent images found in group for testing")
+        logger.info("No images found in group history for testing")
 
     @client.on(events.NewMessage(chats=group))
     async def handler(event):

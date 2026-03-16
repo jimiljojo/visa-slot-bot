@@ -50,7 +50,12 @@ cp .env.example .env
    - `API_ID` – from step 4
    - `API_HASH` – from step 4
    - `GROUP_NAME` – the Telegram group/channel you want to monitor (e.g. `H1B_H4_Visa_Dropbox_slots`)
-   - `TELEGRAM_CHAT_ID` – your own chat ID (or another chat/channel) where notifications/images should be forwarded
+   - `TELEGRAM_CHAT_ID` – where notifications/images should be forwarded. Recommended formats:
+     - To send to **yourself**: `me`
+     - To send to a **specific user**: `@their_username`
+     - To send to a **group/channel**: its `@username` (e.g. `@my_group`) or an invite link name that Telethon can resolve
+
+> **Tip**: Raw numeric IDs (e.g. `8218400068`) may fail with `Cannot find any entity` unless that user/chat is already known in your account. Using `me` or `@username` is more reliable.
 
 > **Note**: The real `.env` file is ignored by git and should **not** be committed. Only `.env.example` is tracked.
 
