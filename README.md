@@ -1,30 +1,76 @@
 # Visa slot bot
 
-I created this bot to getnotified when screenshots are available in the Telegram channel for dropbox appointments. 
+I created this bot to get notified when screenshots are available in a Telegram channel for Dropbox appointments.
 
-How do I use this?
+The original script `tele_visa_script.py` has been **retired** in favor of a more configurable setup using environment variables and `telegram_monitor_clean.py`.
 
-0. Clone this repo. Open your terminal and type `git clone https://github.com/jimiljojo/visa-slot-bot.git`. Once downloaded, `cd visa-slot-bot` to go inside the directory. 
+### Prerequisites
 
-1. Check python version (I used 3.9.7)
-`python3 --version`
+- **Python**: 3.9+ (tested with 3.9.7)
+- **Telegram account**
 
-2. Create a new telegram app. https://my.telegram.org/apps - go here, login and create a new app. It should give you API ID and API Hash values
+### 1. Clone the repo
 
-![image](https://user-images.githubusercontent.com/4116653/143096895-b1a29f9b-ea09-4f8e-9156-e90f1392f879.png)
+```bash
+git clone https://github.com/jimiljojo/visa-slot-bot.git
+cd visa-slot-bot
+```
 
-3. In the python script add values for `api_hash` and `api_id`. From step #2
+### 2. Create and activate a virtual environment (recommended)
 
-![image](https://user-images.githubusercontent.com/4116653/143068961-cb532e6d-1bc7-4777-b02e-a4f56eaf3a98.png)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # on macOS / Linux
+# .venv\Scripts\activate   # on Windows (PowerShell)
+```
 
-4. Create a new telegram channel. Take a note of the username, and add it to the python script for `YOUR CHANNEL HERE` placeholder. This is where you will get screenshots forwarded to.
-    1. Create a new channel and select public
-    2. Type a name after https://t.me/xxxxxx ( this can be same as channelname)
-    3. Use the above name for `YOUR CHANNEL HERE`. (tip: you can also put your username there)
+### 3. Install dependencies
 
-5. Run the python script by typing `python3 tele_visa_script.py`. You will now get MacOS notification when a screenshot is available on the Dropbox channel with slots available. 
+```bash
+pip install -r requirements.txt
+```
 
-6. Keep script running. Install Telegram app on desktop. As soon as you get notification, start booking and dont give up. 
+### 4. Create a Telegram app (API credentials)
 
-All the best, dont loose hope!!
+1. Go to [`https://my.telegram.org/apps`](https://my.telegram.org/apps)
+2. Log in with your Telegram account
+3. Create a new app and note down:
+   - `API_ID`
+   - `API_HASH`
 
+### 5. Set up `.env` from the example
+
+1. Copy the example file:
+
+```bash
+cp .env.example .env
+```
+
+2. Open `.env` and fill in:
+   - `API_ID` – from step 4
+   - `API_HASH` – from step 4
+   - `GROUP_NAME` – the Telegram group/channel you want to monitor (e.g. `H1B_H4_Visa_Dropbox_slots`)
+   - `TELEGRAM_CHAT_ID` – your own chat ID (or another chat/channel) where notifications/images should be forwarded
+
+> **Note**: The real `.env` file is ignored by git and should **not** be committed. Only `.env.example` is tracked.
+
+### 6. Run the monitor
+
+```bash
+python telegram_monitor_clean.py
+```
+
+What this script does:
+
+- Connects to Telegram using your `API_ID` and `API_HASH`
+- Monitors `GROUP_NAME` for new messages
+- Sends yourself a test notification when it starts
+- Forwards new images from the group to `TELEGRAM_CHAT_ID`
+
+Keep this script running (e.g. in a terminal window or tmux/screen). When you receive notifications/images, start booking immediately.
+
+### Legacy script
+
+The older script `tele_visa_script.py` is kept in the repo for reference but is no longer maintained. Please use `telegram_monitor_clean.py` with `.env` and `requirements.txt` instead.
+
+All the best, don’t lose hope!!
