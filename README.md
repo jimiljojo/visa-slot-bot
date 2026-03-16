@@ -70,13 +70,10 @@ What this script does:
 - Connects to Telegram using your `API_ID` and `API_HASH`
 - Monitors `GROUP_NAME` for new messages
 - Sends yourself a test notification when it starts
+- Finds the last image in the group history and sends it for testing
 - Forwards new images from the group to `TELEGRAM_CHAT_ID`
 
 Keep this script running (e.g. in a terminal window or tmux/screen). When you receive notifications/images, start booking immediately.
-
-### Legacy script
-
-The older script `tele_visa_script.py` is kept in the repo for reference but is no longer maintained. Please use `telegram_monitor_clean.py` with `.env` and `requirements.txt` instead.
 
 All the best, don’t lose hope!!
 
