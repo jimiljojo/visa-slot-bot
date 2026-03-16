@@ -1,0 +1,17 @@
+# Local env and secrets - never commit
+.env
+
+# Telethon session (contains auth)
+*.session
+*.session-journal
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.Python
+*.egg-info/
+.eggs/
+
+# OS
+.DS_Store
